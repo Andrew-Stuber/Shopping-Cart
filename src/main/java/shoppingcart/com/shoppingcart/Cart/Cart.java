@@ -1,11 +1,13 @@
-package shoppingcart.com.shoppingcart;
+package shoppingcart.com.shoppingcart.Cart;
+
+import shoppingcart.com.shoppingcart.Product.Product;
 
 import java.util.*;
 
 public class Cart {
     public Cart() { }
 
-    List<Products> products = new ArrayList();
+    List<Product> products = new ArrayList();
 
     public Object totalPrice() {
         double total = 0;
@@ -14,14 +16,14 @@ public class Cart {
             return total;
         }
 
-        for(Products i : products) {
+        for(Product i : products) {
             total += i.getPrice();
         }
 
         return total;
     }
 
-    public List<Products> getProducts() {
+    public List<Product> getProducts() {
         return products;
     }
 
