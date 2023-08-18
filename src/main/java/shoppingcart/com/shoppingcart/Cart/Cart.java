@@ -1,34 +1,49 @@
 package shoppingcart.com.shoppingcart.Cart;
 
 import shoppingcart.com.shoppingcart.Product.Product;
-
 import java.util.*;
 
+import jakarta.annotation.Generated;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.MapKeyJoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+
+@Entity
+@Table
 public class Cart {
     public Cart() { }
 
-    List<Product> products = new ArrayList();
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
 
-    public Object totalPrice() {
-        double total = 0;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "cart_id")
+    List<Product> cart = new ArrayList();
 
-        if(products.isEmpty()) {
-            return total;
-        }
-
-        for(Product i : products) {
-            total += i.getPrice();
-        }
-
-        return total;
+    public List<Product> setPrduct() {
+        return cart;
     }
 
-    public List<Product> getProducts() {
-        return products;
+    public List<Product> getCart() {
+        return cart;
     }
 
-    public Object[] listProducts() {
-        return products.toArray();
+    public Long getId() {
+        return id;
+    }
+
+    public List<Product> listProducts() {
+        return cart;
     }
 
 }

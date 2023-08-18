@@ -20,7 +20,8 @@ public class Product {
 
     public Product(String name, double price, int amount) {
         this.name = name;
-        this.price = price * amount;
+        // this.price = price * amount;
+        this.price = price;
         this.amount = amount;
     }
 

@@ -87,7 +87,7 @@ public class ProductController {
                 amount = getProduct.getAmount();
             }
 
-            Product decreasedAmount = productService.increaseAmount(id, -1*amount);
+            Product decreasedAmount = productService.decreaseAmount(id, amount);
             return ResponseEntity.ok(decreasedAmount);
         } else {
             return ResponseEntity.notFound().build();
