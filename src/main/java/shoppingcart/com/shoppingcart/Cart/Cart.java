@@ -1,21 +1,8 @@
 package shoppingcart.com.shoppingcart.Cart;
 
-import shoppingcart.com.shoppingcart.Product.Product;
 import java.util.*;
 
-import jakarta.annotation.Generated;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.CollectionTable;
-import jakarta.persistence.Column;
-import jakarta.persistence.ElementCollection;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.MapKeyJoinColumn;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table
@@ -26,15 +13,11 @@ public class Cart {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "cart_id")
-    List<Product> cart = new ArrayList();
+    @ElementCollection
+    @CollectionTable(name = "listOfItems", joinColumns = @JoinColumn(name = "cart_id"))
+    List<CartItem> cart = new ArrayList<>();
 
-    public List<Product> setPrduct() {
-        return cart;
-    }
-
-    public List<Product> getCart() {
+    public List<CartItem> getCart() {
         return cart;
     }
 
@@ -42,8 +25,12 @@ public class Cart {
         return id;
     }
 
-    public List<Product> listProducts() {
+    public List<CartItem> listProducts() {
         return cart;
+    }
+
+    public void setCart(List<CartItem> cart) {
+        this.cart = cart;
     }
 
 }
