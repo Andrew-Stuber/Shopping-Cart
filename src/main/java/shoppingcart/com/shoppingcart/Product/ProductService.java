@@ -68,14 +68,17 @@ public class ProductService {
     }
 
     public Product increaseAmount(Long id, int increaseAmount) {
-        Product getProduct = productRepository.findById(id).orElse(null);
-        if(getProduct != null) {
-            int currentAmount = getProduct.getAmount();
-            getProduct.setAmount(currentAmount + increaseAmount);
-            return productRepository.save(getProduct);
-        } else {
-            return null;
-        }
+        Product getProduct = productRepository.findById(id).orElseThrow(() -> new IllegalStateException("Product does not exist."));
+        int currentAmount = getProduct.getAmount();
+        getProduct.setAmount(currentAmount + increaseAmount);
+        return productRepository.save(getProduct);
+    }
+
+    public Product decreaseAmount(Long id, int decreaseAmount) {
+        Product getProduct = productRepository.findById(id).orElseThrow(() -> new IllegalStateException("Product does not exist."));
+        int currentAmount = getProduct.getAmount();
+        getProduct.setAmount(currentAmount - decreaseAmount);
+        return productRepository.save(getProduct);
     }
     
 }
